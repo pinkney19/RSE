@@ -17,7 +17,7 @@ source("Functions_Section_2.R")
 
 # Fig1.a Plot -----------------------------------------------------------
 
-R_hat <- readRDS("~/luna/Paper_Code/Section 2/Data/R_hat1.RDS")
+R_hat <- readRDS("R_hat1.RDS")
 m=10
 plot_fig1_a(R_hat, m, 2, 0)
 

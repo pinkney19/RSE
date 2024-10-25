@@ -93,7 +93,7 @@ plot_fig1_a =function(R_hat, m,p,R.squared){
   par(mar = c(5,4,4,2) + 2.5, mgp=c(4,1,0))
  
   hist(R_hat,freq=F, xlim=c(0,1), main="", breaks=30, col="tomato",
-       xlab = expression(R[12](omega)),cex.lab=2,cex.axis=2, las=1, family ="serif")
+       xlab = expression(R[12](omega)),cex.lab=2,cex.axis=2, las=1, family ="serif", ylim=c(0,9))
   lines(xs,t,type='l', col='black')
 }
 
