@@ -656,3 +656,140 @@ results_periodogram = function(res, model_type, n.stream){
   
   return(list(r1 = r1, r2 = r2))
 }
+
+
+# 14. Ground truth --------------------------------------------------------
+
+Get_ground_truth = function(P_vec, model_type, freq){
+  # Function to get ground truth for each model and each dimension at a particular frequency of interest.
+  params = Get_model_parameters(model_type, P_vec); 
+  
+  true_theta = list(); true_theta = rep(list(true_theta), length(P_vec));
+  true_s = list(); true_s = rep(list(true_s), length(P_vec))
+  true_pc = list(); true_pc = rep(list(true_pc), length(P_vec))
+  for(i in 1:length(P_vec)){
+    HD_A = params$HD_A_list[[i]]; HD_B = params$HD_B_list[[i]]
+    nu = params$nu_list[[i]]
+    gt = MV_spectra(freq, HD_A, HD_B, nu, P_vec[i])
+    true_s[[i]] = gt$spectra[[1]]
+    true_pc[[i]] = gt$pc[[1]]
+    true_theta[[i]] = gt$inv[[1]]
+  }
+  return(list(theta=true_theta, s = true_s, pc = true_pc))
+}
+
+
+# 15. eBIC function -------------------------------------------------------
+
+eBIC_check = function(theta, S, z, gam, n.stream, n.trials){
+  #theta -    estimate for theta
+  #S -        estimator of SDM -> either TA or pooled TA
+  #z -        sparse output from ADMM
+  #n.stream   no. data streams/dimensionality.
+  
+  lik = -log(Det(theta))+tr(S%*%theta)
+  u = z[upper.tri(z, diag = F)]
+  edges = length(u[u!=0])
+  
+  op = 2*n.trials*lik +  (edges *log(n.trials)) + 4*edges*gam*log(n.stream)
+  
+  return(op)
+} 
+
+
+# 16. Function to select regularsiation parameter (GLASSO) -------------------------
+
+lam_func = function(lambdas, out_storm, N_samp, gt, p, n.trials){
+  av_mse = NULL; l2 = NULL; l2 = rep(list(l2), length(lambdas));
+  F1 = NULL; F1 = rep(list(F1), length(lambdas))
+  ebic = list(); ebic = rep(list(ebic), length(lambdas))
+  for(i in 1:length(lambdas)){
+    b = N_samp*i
+    if(i==1){
+      res = out_storm[1:b] #i.e. samples 1-10 for lambda = 0.1
+    }
+    if(i!=1){
+      res = out_storm[((b-N_samp)+1):b]
+    }
+    
+    theta_list = map(res, 1)
+    z_list = map(res, 2)
+    S_list = map(res, 3)
+    l2[[i]] = unlist(lapply(theta_list, function(x) performance_measures(x, gt$theta, F)$l2))
+    av_mse[i] = mean(l2[[i]])
+    
+    pc_list = lapply(z_list, partial_co)
+    F1[[i]] = lapply(pc_list, function(x) performance_measures(x, gt$pc, T)$F1)
+    
+    for(j in 1:length(theta_list)){
+      ebic[[i]][j] = eBIC_check(theta_list[[j]], S_list[[j]], z_list[[j]], 0.5, p, n.trials)
+    }
+    
+  }
+  
+  lam1 = lambdas[which.min(av_mse)]
+  idx = NULL;idx2 = NULL; idx3 = NULL;
+  e = list(); e = rep(list(e), N_samp)
+  for(j in 1:N_samp){
+    l = unlist(map(l2,j))
+    idx[j]= which.min(l)
+    
+    e[[j]] = unlist(map(ebic,j))
+    idx2[j] = which.min(Re(e[[j]]))
+    
+    f = unlist(map(F1,j))
+    idx3[j] = which.max(f)
+  }
+  lam_mse = mean(lambdas[idx])
+  lam_ebic = mean(lambdas[idx2])
+  lam_f1 = mean(lambdas[idx3])
+  
+  return(list(lam_mse = lam_mse, lam_f1 =  lam_f1, l_ebic = lam_ebic, ebic= ebic))
+}
+
+
+# 17. Function to select regularisation parameter (ridge) -----------------
+
+lam_func_ridge = function(lambdas, out_storm, N_samp, gt, p, n.trials){
+  av_mse = NULL; l2 = NULL; l2 = rep(list(l2), length(lambdas));
+  F1 = NULL; F1 = rep(list(F1), length(lambdas))
+  ebic = list(); ebic = rep(list(ebic), length(lambdas))
+  for(i in 1:length(lambdas)){
+    b = N_samp*i
+    if(i==1){
+      res = out_storm[1:b] #i.e. samples 1-10 for lambda = 0.1
+    }
+    if(i!=1){
+      res = out_storm[((b-N_samp)+1):b]
+    }
+    
+    theta_list = map(res, 1)
+    S_list = map(res, 2)
+    l2[[i]] = unlist(lapply(theta_list, function(x) performance_measures(x, gt$theta, F)$l2))
+    av_mse[i] = mean(l2[[i]])
+    
+    
+    for(j in 1:length(theta_list)){
+      ebic[[i]][j] = eBIC_check(theta_list[[j]], S_list[[j]], theta_list[[j]], 0.5, p, n.trials)
+    }
+    
+  }
+  
+  lam1 = lambdas[which.min(av_mse)]
+  idx = NULL;idx2 = NULL; idx3 = NULL;
+  e = list(); e = rep(list(e), N_samp)
+  for(j in 1:N_samp){
+    l = unlist(map(l2,j))
+    idx[j]= which.min(l)
+    
+    e[[j]] = unlist(map(ebic,j))
+    idx2[j] = which.min(Re(e[[j]]))
+    
+    
+  }
+  lam_mse = mean(lambdas[idx])
+  lam_ebic = mean(lambdas[idx2])
+  
+  
+  return(list(lam_mse = lam_mse, l_ebic = lam_ebic, ebic= ebic))
+}
