@@ -39,6 +39,18 @@ gt_12 = map(ground_truth,1)
 gt_48 = map(ground_truth,2)
 gt_96 = map(ground_truth,3)
 
+library(pROC)
+
+# auroc <- function(true_matrix, estimated_matrix) {
+#   # vectorise matrices
+#   true_values <- as.vector(true_matrix)
+#   estimated_values <- as.vector(estimated_matrix)
+#   
+#   # Calculate AUROC
+#   roc_obj <- roc(true_values, estimated_values)
+#   auc(roc_obj)
+# }
+
 metrics = function(res, gt){
 
   theta_list = map(res, 1)
@@ -49,7 +61,24 @@ metrics = function(res, gt){
   pc_list = lapply(z_list, partial_co)
   F1 = mean(unlist(lapply(pc_list, function(x) performance_measures(x, gt$pc, T)$F1)))
   
-  return(list(F1 = F1, av_mse = av_mse))
+  # vectorise matrices for AUROC
+  true_pc = as.vector(gt$pc)
+  est_pc_vec = lapply(pc_list, as.vector)
+  
+  # Check if the response has more than two levels
+  if (length(unique(true_pc)) > 2) {
+   
+    roc_obj = lapply(est_pc_vec, function(x){multiclass.roc(true_pc, x, direction="<")})
+    auc_list = lapply(roc_obj, auc)
+  } else {
+    # Use roc for binary classification
+    roc_obj = lapply(est_pc_vec, function(x){roc(true_pc, x, direction="<")})
+    auc_list = lapply(roc_obj, auc)
+  }
+  
+  auc_obj = mean(unlist(auc_list))
+  
+  return(list(F1 = F1, av_mse = av_mse, av_AUC = auc_obj))
   }
 
 metrics(res1, gt_12)
@@ -128,4 +157,8 @@ gt_96 = map(ground_truth,3)
 metrics(res7, gt_12)
 metrics(res8, gt_48)
 metrics(res9, gt_96)
+
+
+# AUROC -------------------------------------------------------------------
+
 

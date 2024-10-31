@@ -137,3 +137,35 @@ plot_fig1_bc = function(res, res_eig, res_eig_min){
   
 }
 
+
+# 5. Periodogram without mean correction ----------------------------------
+
+periodogram_no_mean_corr = function(data, omega, Big_T){
+  
+  
+  img=sqrt(as.complex(-1)) #imaginary number i^2=-1
+  H_omega = (Big_T/sqrt(Big_T)) * exp((-img*omega*Big_T)/2) * sinc((omega*Big_T)/2) #FT of Taper
+  p = length(data) #dimensionality 
+  m = length(data[[1]]) #trials
+  
+  N_t = NULL;
+  N_t = rep(list(N_t), m); bar_d = N_t; I = list();
+  
+  for(j in 1:m){
+    for(i in 1:p){
+      #N_t[[j]][i] = length(data[[i]][[j]])
+      bar_d[[j]][i] = (1/sqrt(Big_T) * sum(exp(-img*omega*data[[i]][[j]])) ) #- ((N_t[[j]][i]/Big_T) * H_omega )
+    }
+    
+    I[[j]] = (outer((bar_d[[j]]), Conj(bar_d[[j]])))/(2*pi)
+  }
+  
+  p1 = Reduce("+", I)/length(I)
+  
+  return(p1)
+  
+}
+
+
+
+
