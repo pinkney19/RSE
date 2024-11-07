@@ -33,7 +33,7 @@ if(k==1){
                                     model_times = map(model_times,1) #for p = 12
                                     
                                     data_idx = as.numeric(k[1])
-                                    data = model1_times[[data_idx]]
+                                    data = model_times[[data_idx]]
                                     
                                     S_hat = periodogram(data, freq, Big_T)
                                     res = glasso(n.stream, lambda, S_hat, Max_iter)
@@ -42,13 +42,13 @@ if(k==1){
                                     theta_list = res$theta #get theta estimates
                                     z_list = res$z #gets Z estimate
                                     
-                                    return(list(theta_list, z_list)) 
+                                    return(list(theta_list, z_list, S_hat)) 
                                   }
   
   end <-Sys.time() 
-  stopCluster(cl) #need this or it breaks -> will just continue running.
   print(end-start)
   saveRDS(res, file = paste0("out", k, ".RDS"))
+  stopCluster(cl) 
 }
 
 # p=48
@@ -79,7 +79,7 @@ if(k==2){
                                                     model_times = map(model_times,2) #for p = 48 
                                                     
                                                     data_idx = as.numeric(k[1])
-                                                    data = model1_times[[data_idx]]
+                                                    data = model_times[[data_idx]]
                                                     
                                                     S_hat = periodogram(data, freq, Big_T)
                                                     res = glasso(n.stream, lambda, S_hat, Max_iter)
@@ -88,13 +88,13 @@ if(k==2){
                                                     theta_list = res$theta #get theta estimates
                                                     z_list = res$z #gets Z estimate
                                                     
-                                                    return(list(theta_list, z_list)) 
+                                                    return(list(theta_list, z_list, S_hat))
                                                   }
   
   end <-Sys.time() 
-  stopCluster(cl) #need this or it breaks -> will just continue running.
   print(end-start)
   saveRDS(res, file = paste0("out", k, ".RDS"))
+  stopCluster(cl) #need this or it breaks -> will just continue running.
 }
 
 # p = 96
@@ -126,7 +126,7 @@ if(k==3){
                                                     model_times = map(model_times,3) #for p = 96 
                                                     
                                                     data_idx = as.numeric(k[1])
-                                                    data = model1_times[[data_idx]]
+                                                    data = model_times[[data_idx]]
                                                     
                                                     S_hat = periodogram(data, freq, Big_T)
                                                     res = glasso(n.stream, lambda, S_hat, Max_iter)
@@ -135,13 +135,13 @@ if(k==3){
                                                     theta_list = res$theta #get theta estimates
                                                     z_list = res$z #gets Z estimate
                                                     
-                                                    return(list(theta_list, z_list)) 
+                                                    return(list(theta_list, z_list, S_hat))
                                                   }
   
   end <-Sys.time() 
-  stopCluster(cl) #need this or it breaks -> will just continue running.
   print(end-start)
   saveRDS(res, file = paste0("out", k, ".RDS"))
+  stopCluster(cl) #need this or it breaks -> will just continue running.s
 }
 
 
@@ -175,7 +175,7 @@ if(k==4){
                                                     model_times = map(model_times,1) #for p = 12 
                                                     
                                                     data_idx = as.numeric(k[1])
-                                                    data = model1_times[[data_idx]]
+                                                    data = model_times[[data_idx]]
                                                     
                                                     S_hat = periodogram(data, freq, Big_T)
                                                     res = glasso(n.stream, lambda, S_hat, Max_iter)
@@ -184,13 +184,13 @@ if(k==4){
                                                     theta_list = res$theta #get theta estimates
                                                     z_list = res$z #gets Z estimate
                                                     
-                                                    return(list(theta_list, z_list)) 
+                                                    return(list(theta_list, z_list, S_hat))
                                                   }
   
   end <-Sys.time() 
-  stopCluster(cl) #need this or it breaks -> will just continue running.
   print(end-start)
   saveRDS(res, file = paste0("out", k, ".RDS"))
+  stopCluster(cl) #need this or it breaks -> will just continue running.
 }
 
 # p = 48
@@ -221,7 +221,7 @@ if(k==5){
                                                     model_times = map(model_times,2) #for p = 48 
                                                     
                                                     data_idx = as.numeric(k[1])
-                                                    data = model1_times[[data_idx]]
+                                                    data = model_times[[data_idx]]
                                                     
                                                     S_hat = periodogram(data, freq, Big_T)
                                                     res = glasso(n.stream, lambda, S_hat, Max_iter)
@@ -230,13 +230,13 @@ if(k==5){
                                                     theta_list = res$theta #get theta estimates
                                                     z_list = res$z #gets Z estimate
                                                     
-                                                    return(list(theta_list, z_list)) 
+                                                    return(list(theta_list, z_list, S_hat)) 
                                                   }
   
   end <-Sys.time() 
-  stopCluster(cl) #need this or it breaks -> will just continue running.
   print(end-start)
   saveRDS(res, file = paste0("out", k, ".RDS"))
+  stopCluster(cl) #need this or it breaks -> will just continue running.
 }
 
 # p = 96
@@ -268,7 +268,7 @@ if(k==6){
                                                     model_times = map(model_times,3) #for p = 96 
                                                     
                                                     data_idx = as.numeric(k[1])
-                                                    data = model1_times[[data_idx]]
+                                                    data = model_times[[data_idx]]
                                                     
                                                     S_hat = periodogram(data, freq, Big_T)
                                                     res = glasso(n.stream, lambda, S_hat, Max_iter)
@@ -277,13 +277,13 @@ if(k==6){
                                                     theta_list = res$theta #get theta estimates
                                                     z_list = res$z #gets Z estimate
                                                     
-                                                    return(list(theta_list, z_list)) 
+                                                    return(list(theta_list, z_list, S_hat))
                                                   }
   
   end <-Sys.time() 
-  stopCluster(cl) #need this or it breaks -> will just continue running.
   print(end-start)
-  saveRDS(res, file = paste0("out", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))s
+  stopCluster(cl) #need this or it breaks -> will just continue running.
 }
 
 
