@@ -45,69 +45,24 @@ n.trials = 10
 # for now -----------------------------------------------------------------
 
 
-lam_func3 = function(lambdas, out_storm, N_samp, gt, p, n.trials){
-  av_mse = NULL; l2 = NULL; l2 = rep(list(l2), length(lambdas));
-  F1 = NULL; F1 = rep(list(F1), length(lambdas))
-  ebic = list(); ebic = rep(list(ebic), length(lambdas))
-  for(i in 1:length(lambdas)){
-    b = N_samp*i
-    if(i==1){
-      res = out_storm[1:b] #i.e. samples 1-10 for lambda = 0.1
-    }
-    if(i!=1){
-      res = out_storm[((b-N_samp)+1):b]
-    }
-    
-    theta_list = map(res, 1)
-    z_list = map(res, 2)
-    #S_list = map(res, 3)
-    l2[[i]] = unlist(lapply(theta_list, function(x) performance_measures(x, gt$theta, F)$l2))
-    av_mse[i] = mean(l2[[i]])
-    
-    pc_list = lapply(z_list, partial_co)
-    F1[[i]] = lapply(pc_list, function(x) performance_measures(x, gt$pc, T)$F1)
-    
-    # for(j in 1:length(theta_list)){
-    #   ebic[[i]][j] = eBIC_check(theta_list[[j]], S_list[[j]], z_list[[j]], 0.5, p, n.trials)
-    # }
-    
-  }
-  
-  lam1 = lambdas[which.min(av_mse)]
-  idx = NULL;idx2 = NULL; idx3 = NULL;
-  e = list(); e = rep(list(e), N_samp)
-  for(j in 1:N_samp){
-    l = unlist(map(l2,j))
-    idx[j]= which.min(l)
-    
-   # e[[j]] = unlist(map(ebic,j))
-  #  idx2[j] = which.min(Re(e[[j]]))
-    
-    f = unlist(map(F1,j))
-    idx3[j] = which.max(f)
-  }
-  lam_mse = mean(lambdas[idx])
-  #lam_ebic = mean(lambdas[idx2])
-  lam_f1 = mean(lambdas[idx3])
-  
-  return(list(lam_mse = lam_mse, lam_f1 =  lam_f1))#, #l_ebic = lam_ebic, ebic= ebic))
-}
 
-l12 = lam_func3(lambdas, res1, N_samp, gt_12,12, n.trials)
-l48 = lam_func3(lambdas, res2, N_samp, gt_48, 48, n.trials)
-l96 = lam_func3(lambdas, res3, N_samp, gt_96, 96, n.trials)
+l12 = lam_func(lambdas, res1, N_samp, gt_12,12, n.trials)
+l48 = lam_func(lambdas, res2, N_samp, gt_48, 48, n.trials)
+l96 = lam_func(lambdas, res3, N_samp, gt_96, 96, n.trials)
 
 ma_lams = rbind(l12, l48, l96)
-
+ma_lams
 # 50 trials 
 res4 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/Model_A/out4.RDS") #12
-res5 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/Model_A/out5.RDS") #48 
+res5 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/Model_A/out5.RDS") #48
+res6 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/Model_A/out6.RDS") 
 
 n.trials = 50
-l12 = lam_func3(lambdas, res4, N_samp, gt_12,12, n.trials)
-l48 = lam_func3(lambdas, res5, N_samp, gt_48, 48, n.trials)
+l12 = lam_func(lambdas, res4, N_samp, gt_12,12, n.trials)
+l48 = lam_func(lambdas, res5, N_samp, gt_48, 48, n.trials)
+l96 = lam_func(lambdas, res5, N_samp, gt_48, 48, n.trials)
 
-rbind(l12, l48)
+rbind(l12, l48, l96)
 # model b -----------------------------------------------------------------
 
 # Model b -----------------------------------------------------------------

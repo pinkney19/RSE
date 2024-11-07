@@ -282,7 +282,7 @@ if(k==6){
   
   end <-Sys.time() 
   print(end-start)
-  saveRDS(res, file = paste0("out", k, ".RDS"))s
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) #need this or it breaks -> will just continue running.
 }
 

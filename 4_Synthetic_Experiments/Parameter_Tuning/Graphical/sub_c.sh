@@ -2,7 +2,7 @@
 
 #SBATCH -J tunc
 #SBATCH -c 31
-#SBATCH --array=1-6%3
+#SBATCH --array=1-7%3
 #SBATCH -e t%.e
 #SBATCH -o t%.out
 #SBATCH --mem-per-cpu=4G
