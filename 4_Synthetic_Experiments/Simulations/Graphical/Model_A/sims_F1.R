@@ -47,7 +47,7 @@ if(k==1){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -91,7 +91,7 @@ if(k==2){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -135,7 +135,7 @@ if(k==3){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -181,7 +181,7 @@ if(k==4){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -223,7 +223,7 @@ if(k==5){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -267,7 +267,7 @@ if(k==6){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 

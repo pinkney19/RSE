@@ -13,7 +13,7 @@ k <- as.numeric(commandArgs(trailingOnly=TRUE)[1]) #needed to queue jobs on stor
 if(k==1){
   library(doParallel)
   library(doRNG)
-  library(pracma) #for logspace
+  library(purrr) 
   # get data
   model_times <- readRDS("res1.RDS")
   model_times = map(model_times,1) #for p = 12
@@ -47,7 +47,7 @@ if(k==1){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -57,7 +57,7 @@ if(k==1){
 if(k==2){
   library(doParallel)
   library(doRNG)
-  library(pracma) #for logspace
+  library(purrr) 
   # get data
   model_times <- readRDS("res1.RDS")
   model_times = map(model_times,2) #for p = 48
@@ -91,7 +91,7 @@ if(k==2){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -101,7 +101,7 @@ if(k==2){
 if(k==3){
   library(doParallel)
   library(doRNG)
-  library(pracma) #for logspace
+  library(purrr) 
   # get data
   model_times <- readRDS("res1.RDS")
   model_times = map(model_times,3) #for p = 96
@@ -135,7 +135,7 @@ if(k==3){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -147,7 +147,7 @@ if(k==3){
 if(k==4){
   library(doParallel)
   library(doRNG)
-  library(pracma) #for logspace
+  library(purrr) 
   # get data
   model_times <- readRDS("res4.RDS")
   model_times = map(model_times,1) #for p = 12
@@ -181,7 +181,7 @@ if(k==4){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -189,7 +189,7 @@ if(k==4){
 if(k==5){
   library(doParallel)
   library(doRNG)
-  library(pracma) #for logspace
+  library(purrr) 
   # get data
   model_times <- readRDS("res4.RDS")
   model_times = map(model_times,2) #for p = 48
@@ -223,7 +223,7 @@ if(k==5){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
@@ -233,7 +233,7 @@ if(k==5){
 if(k==6){
   library(doParallel)
   library(doRNG)
-  library(pracma) #for logspace
+  library(purrr) 
   # get data
   model_times <- readRDS("res4.RDS")
   model_times = map(model_times,3) #for p = 96
@@ -267,7 +267,7 @@ if(k==6){
   
   end <-Sys.time()
   print(end-start)
-  saveRDS(res, file = paste0("res", k, ".RDS"))
+  saveRDS(res, file = paste0("out", k, ".RDS"))
   stopCluster(cl) 
 }
 
