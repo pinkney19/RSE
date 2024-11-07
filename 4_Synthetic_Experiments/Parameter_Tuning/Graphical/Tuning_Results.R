@@ -53,14 +53,14 @@ get_tuned_lambdas = function(model_type, model_idx){
   # 50 trials 
   res4 <- readRDS(paste0("~/luna/RSE/Synthetic_Experiments/Tuning/Model_",model_type,"/out4.RDS")) #12
   res5 <- readRDS(paste0("~/luna/RSE/Synthetic_Experiments/Tuning/Model_",model_type,"/out5.RDS")) #48
-  #res6 <- readRDS(paste0("~/luna/RSE/Synthetic_Experiments/Tuning/Model_",model_type,"/out6.RDS")) #96
+  res6 <- readRDS(paste0("~/luna/RSE/Synthetic_Experiments/Tuning/Model_",model_type,"/out6.RDS")) #96
   
   n.trials = 50
   l12_50 = lam_func(lambdas, res4, N_samp, gt_12,12, n.trials)
   l48_50 = lam_func(lambdas, res5, N_samp, gt_48, 48, n.trials)
-  #l96_50 = lam_func(lambdas, res6, N_samp, gt_96, 96, n.trials)
+  l96_50 = lam_func(lambdas, res6, N_samp, gt_96, 96, n.trials)
   
-  model_A_lambdas = rbind(l12[1:3], l12_50[1:3], l48[1:3], l48_50[1:3], l96[1:3])#, l96_50[1:3])
+  model_A_lambdas = rbind(l12[1:3], l12_50[1:3], l48[1:3], l48_50[1:3], l96[1:3], l96_50[1:3])
   model_A_lambdas = as.data.frame(model_A_lambdas)
   
   return(model_A_lambdas)
@@ -71,53 +71,3 @@ lams_A = get_tuned_lambdas("A", 1)
 lams_B = get_tuned_lambdas("B", 2)
 lams_C =  get_tuned_lambdas("C", 2)
 
-
-
-
-# 
-# 
-# # Model b -----------------------------------------------------------------
-# 
-# res4 <- readRDS("~/luna/Paper_Code/Section 4/Reviews/tuning/model_b/res1.RDS")
-# res5 <- readRDS("~/luna/Paper_Code/Section 4/Reviews/tuning/model_b/res2.RDS")
-# res6 <- readRDS("~/luna/Paper_Code/Section 4/Reviews/tuning/model_b/res3.RDS")
-# 
-# 
-# ground_truth = Get_ground_truth(P_vec, 2, 0.0628)
-# 
-# gt_12 = map(ground_truth,1)
-# gt_48 = map(ground_truth,2)
-# gt_96 = map(ground_truth,3)
-# 
-# l12 = lam_func(lambdas, res4, N_samp, gt_12,12, 10)
-# l48 = lam_func(lambdas, res5, N_samp, gt_48, 48, 10)
-# l96 = lam_func(lambdas, res6, N_samp, gt_96, 96, 10)
-# 
-# mb_lams = rbind(l12, l48, l96)
-# 
-# 
-# # Model c -----------------------------------------------------------------
-# 
-# res7 <- readRDS("~/luna/Paper_Code/Section 4/Reviews/tuning/model_c/res1.RDS")
-# res8 <- readRDS("~/luna/Paper_Code/Section 4/Reviews/tuning/model_c/res2.RDS")
-# res9 <- readRDS("~/luna/Paper_Code/Section 4/Reviews/tuning/model_c/res3.RDS")
-# 
-# 
-# ground_truth = Get_ground_truth(P_vec, 3, 0.0628)
-# 
-# gt_12 = map(ground_truth,1)
-# gt_48 = map(ground_truth,2)
-# gt_96 = map(ground_truth,3)
-# 
-# l12 = lam_func(lambdas, res7, N_samp, gt_12,12, 10)
-# l48 = lam_func(lambdas, res8, N_samp, gt_48, 48, 10)
-# l96 = lam_func(lambdas, res9, N_samp, gt_96, 96, 10)
-# 
-# mc_lams = rbind(l12, l48, l96)
-# 
-# 
-# # Print results -----------------------------------------------------------
-# 
-# print(ma_lams)
-# print(mb_lams)
-# print(mc_lams)
