@@ -140,7 +140,7 @@ plot_fig1_bc = function(res, res_eig, res_eig_min){
 
 # 5. Periodogram without mean correction ----------------------------------
 
-periodogram_no_mean_corr = function(data, omega, Big_T){
+raw_periodogram = function(data, omega, Big_T){
   
   
   img=sqrt(as.complex(-1)) #imaginary number i^2=-1
@@ -154,7 +154,7 @@ periodogram_no_mean_corr = function(data, omega, Big_T){
   for(j in 1:m){
     for(i in 1:p){
       #N_t[[j]][i] = length(data[[i]][[j]])
-      bar_d[[j]][i] = (1/sqrt(Big_T) * sum(exp(-img*omega*data[[i]][[j]])) ) #- ((N_t[[j]][i]/Big_T) * H_omega )
+      bar_d[[j]][i] = sum(exp(-img*omega*data[[i]][[j]]))  #- ((N_t[[j]][i]/Big_T) * H_omega )
     }
     
     I[[j]] = (outer((bar_d[[j]]), Conj(bar_d[[j]])))/(2*pi)

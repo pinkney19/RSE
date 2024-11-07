@@ -23,6 +23,7 @@ freqs = 0.0628 #chosen w.l.o.g since we are looking at poisson process.
 MC_samples = 1000; #no. Monte Carlo samples
 p = 20 #no. of dimensions/data streams
 
+
 times = pprocess(lambda, T_prime, m,p) #simulate times
 freqs = seq(from= -0.1,to= 0.1,length.out = 100)
 
@@ -46,7 +47,8 @@ plot_power = function(S_hat, a,b, title){
 plot_power(S_hat, -10,150, "Mean Corrected")
 plot_power(S_hat_no_corr, -10,150, "No Mean Correction")
 
-# zoom in 
-plot_power(S_hat, -1,5, "Mean Corrected")
-plot_power(S_hat_no_corr, -1,5, "No Mean Correction")
+
+#S_hat_paper = lapply(freqs, function(x) periodogram_up(times, x, T_prime))
+#plot_power(S_hat_paper, -10, 1000, "Paper")
+
 
