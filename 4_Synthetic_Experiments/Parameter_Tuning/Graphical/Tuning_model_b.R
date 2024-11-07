@@ -29,7 +29,7 @@ if(k==1){
                                     lambda = as.numeric(k[2])
                                     
                                     # get data
-                                    model_times <- readRDS("res1.RDS")
+                                    model_times <- readRDS("res2.RDS") # for model b with 10 trials
                                     model_times = map(model_times,1) #for p = 12
                                     
                                     data_idx = as.numeric(k[1])
@@ -75,7 +75,7 @@ if(k==2){
                                                     lambda = as.numeric(k[2])
                                                     
                                                     # get data
-                                                    model_times <- readRDS("res1.RDS")
+                                                    model_times <- readRDS("res2.RDS")
                                                     model_times = map(model_times,2) #for p = 48 
                                                     
                                                     data_idx = as.numeric(k[1])
@@ -122,7 +122,7 @@ if(k==3){
                                                     lambda = as.numeric(k[2])
                                                     
                                                     # get data
-                                                    model_times <- readRDS("res1.RDS")
+                                                    model_times <- readRDS("res2.RDS")
                                                     model_times = map(model_times,3) #for p = 96 
                                                     
                                                     data_idx = as.numeric(k[1])
@@ -171,7 +171,7 @@ if(k==4){
                                                     lambda = as.numeric(k[2])
                                                     
                                                     # get data
-                                                    model_times <- readRDS("res4.RDS") # for model a 50 trials
+                                                    model_times <- readRDS("res5.RDS") # for model a 50 trials
                                                     model_times = map(model_times,1) #for p = 12 
                                                     
                                                     data_idx = as.numeric(k[1])
@@ -217,7 +217,7 @@ if(k==5){
                                                     lambda = as.numeric(k[2])
                                                     
                                                     # get data
-                                                    model_times <- readRDS("res4.RDS") # for model a 50 trials
+                                                    model_times <- readRDS("res5.RDS") # for model a 50 trials
                                                     model_times = map(model_times,2) #for p = 48 
                                                     
                                                     data_idx = as.numeric(k[1])
@@ -264,7 +264,7 @@ if(k==6){
                                                     lambda = as.numeric(k[2])
                                                     
                                                     # get data
-                                                    model_times <- readRDS("res4.RDS")
+                                                    model_times <- readRDS("res5.RDS")
                                                     model_times = map(model_times,3) #for p = 96 
                                                     
                                                     data_idx = as.numeric(k[1])
