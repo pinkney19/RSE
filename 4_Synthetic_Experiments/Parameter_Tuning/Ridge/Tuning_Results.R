@@ -73,3 +73,5 @@ lams_C =  get_tuned_lambdas("C", 2)
 
 lams_data = as.data.frame(cbind(lams_A, lams_B, lams_C))
 names(lams_data) = c("A", "B", "C")
+setwd("~/Downloads/RSE/4_Synthetic_Experiments/Parameter_Tuning/Ridge")
+saveRDS(lams_data, "Ridge_lambdas.RDS")
