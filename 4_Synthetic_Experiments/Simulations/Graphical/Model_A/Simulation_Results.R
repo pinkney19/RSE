@@ -143,6 +143,209 @@ tab_mse = cbind(mses_mse, mses_11, mses_ebic)
 tab_f1 = cbind(f1s_mse, f1s_f1, f1s_ebic)
 tab_auroc = cbind(auroc_mse, auroc_f1, auroc_ebic)
 
+
+################################################################################################
+###############################################################################################
+
+# Model b -----------------------------------------------------------------
+
+
+# Get ground truth
+P_vec = c(12,48,96)
+ground_truth = Get_ground_truth(P_vec, 2, 0.0628)
+
+gt_12 = map(ground_truth,1)
+gt_48 = map(ground_truth,2)
+gt_96 = map(ground_truth,3)
+
+# eBIC results ------------------------------------------------------------
+
+# load data
+# 10 trials 
+out1 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/eBIC/out1.RDS") #p=12
+out2 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/eBIC/out2.RDS") #p=48
+out3 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/eBIC/out3.RDS") #p=96
+# 50 trials
+out4 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/eBIC/out4.RDS") #p=12
+out5 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/eBIC/out5.RDS") #p=48
+out6 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/eBIC/out6.RDS") #p=96
+
+r1 = metrics(out1, gt_12)
+r2 = metrics(out2, gt_48)
+r3 = metrics(out3, gt_96)
+
+r4 = metrics(out4, gt_12)
+r5 = metrics(out5, gt_48)
+r6 = metrics(out6, gt_96)
+
+
+mses_ebic = c(r1$av_mse, r4$av_mse, r2$av_mse, r5$av_mse, r3$av_mse, r6$av_mse)
+f1s_ebic = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
+auroc_ebic = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
+
+# mse results -------------------------------------------------------------
+
+# load data
+# 10 trials 
+out1 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/mse/out1.RDS") #p=12
+out2 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/mse/out2.RDS") #p=48
+out3 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/mse/out3.RDS") #p=96
+# 50 trials
+out4 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/mse/out4.RDS") #p=12
+out5 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/mse/out5.RDS") #p=48
+out6 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/mse/out6.RDS") #p=96
+
+
+r1 = metrics(out1, gt_12)
+r2 = metrics(out2, gt_48)
+r3 = metrics(out3, gt_96)
+
+r4 = metrics(out4, gt_12)
+r5 = metrics(out5, gt_48)
+r6 = metrics(out6, gt_96)
+
+
+mses_mse = c(r1$av_mse, r4$av_mse, r2$av_mse, r5$av_mse, r3$av_mse, r6$av_mse)
+f1s_mse = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
+auroc_mse = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
+
+
+# f1 results --------------------------------------------------------------
+
+# load data
+# 10 trials 
+out1 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/f1/out1.RDS") #p=12
+out2 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/f1/out2.RDS") #p=48
+out3 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/f1/out3.RDS") #p=96
+# 50 trials
+out4 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/f1/out4.RDS") #p=12
+out5 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/f1/out5.RDS") #p=48
+out6 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_B/Results/f1/out6.RDS") #p=96
+
+
+r1 = metrics(out1, gt_12)
+r2 = metrics(out2, gt_48)
+r3 = metrics(out3, gt_96)
+
+r4 = metrics(out4, gt_12)
+r5 = metrics(out5, gt_48)
+r6 = metrics(out6, gt_96)
+
+
+mses_11 = c(r1$av_mse, r4$av_mse, r2$av_mse, r5$av_mse, r3$av_mse, r6$av_mse)
+f1s_f1 = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
+auroc_f1 = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
+
+
+# Model b results table ---------------------------------------------------
+
+tab_mse = cbind(mses_mse, mses_11, mses_ebic)
+tab_f1 = cbind(f1s_mse, f1s_f1, f1s_ebic)
+tab_auroc = cbind(auroc_mse, auroc_f1, auroc_ebic)
+
+
+####################################################################################
+####################################################################################
+
+
+#  Model c ----------------------------------------------------------------
+
+
+
+# Get ground truth
+P_vec = c(12,48,96)
+ground_truth = Get_ground_truth(P_vec, 3, 0.0628)
+
+gt_12 = map(ground_truth,1)
+gt_48 = map(ground_truth,2)
+gt_96 = map(ground_truth,3)
+
+# eBIC results ------------------------------------------------------------
+
+# load data
+# 10 trials 
+out1 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/eBIC/out1.RDS") #p=12
+out2 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/eBIC/out2.RDS") #p=48
+out3 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/eBIC/out3.RDS") #p=96
+# 50 trials
+out4 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/eBIC/out4.RDS") #p=12
+out5 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/eBIC/out5.RDS") #p=48
+out6 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/eBIC/out6.RDS") #p=96
+
+r1 = metrics(out1, gt_12)
+r2 = metrics(out2, gt_48)
+r3 = metrics(out3, gt_96)
+
+r4 = metrics(out4, gt_12)
+r5 = metrics(out5, gt_48)
+r6 = metrics(out6, gt_96)
+
+
+mses_ebic = c(r1$av_mse, r4$av_mse, r2$av_mse, r5$av_mse, r3$av_mse, r6$av_mse)
+f1s_ebic = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
+auroc_ebic = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
+
+# mse results -------------------------------------------------------------
+
+# load data
+# 10 trials 
+out1 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/mse/out1.RDS") #p=12
+out2 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/mse/out2.RDS") #p=48
+out3 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/mse/out3.RDS") #p=96
+# 50 trials
+out4 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/mse/out4.RDS") #p=12
+out5 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/mse/out5.RDS") #p=48
+out6 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/mse/out6.RDS") #p=96
+
+
+r1 = metrics(out1, gt_12)
+r2 = metrics(out2, gt_48)
+r3 = metrics(out3, gt_96)
+
+r4 = metrics(out4, gt_12)
+r5 = metrics(out5, gt_48)
+r6 = metrics(out6, gt_96)
+
+
+mses_mse = c(r1$av_mse, r4$av_mse, r2$av_mse, r5$av_mse, r3$av_mse, r6$av_mse)
+f1s_mse = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
+auroc_mse = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
+
+
+# f1 results --------------------------------------------------------------
+
+# load data
+# 10 trials 
+out1 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/f1/out1.RDS") #p=12
+out2 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/f1/out2.RDS") #p=48
+out3 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/f1/out3.RDS") #p=96
+# 50 trials
+out4 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/f1/out4.RDS") #p=12
+out5 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/f1/out5.RDS") #p=48
+out6 <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_C/Results/f1/out6.RDS") #p=96
+
+
+r1 = metrics(out1, gt_12)
+r2 = metrics(out2, gt_48)
+r3 = metrics(out3, gt_96)
+
+r4 = metrics(out4, gt_12)
+r5 = metrics(out5, gt_48)
+r6 = metrics(out6, gt_96)
+
+
+mses_11 = c(r1$av_mse, r4$av_mse, r2$av_mse, r5$av_mse, r3$av_mse, r6$av_mse)
+f1s_f1 = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
+auroc_f1 = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
+
+
+# Model c results table ---------------------------------------------------
+
+tab_mse = cbind(mses_mse, mses_11, mses_ebic)
+tab_f1 = cbind(f1s_mse, f1s_f1, f1s_ebic)
+tab_auroc = cbind(auroc_mse, auroc_f1, auroc_ebic)
+
+
 # 
 # 
 # # model b
