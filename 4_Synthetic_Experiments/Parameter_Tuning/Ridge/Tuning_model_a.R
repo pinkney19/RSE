@@ -47,7 +47,7 @@ if(k==1){
   end <-Sys.time()
   saveRDS(res, file = paste0("out", k, ".RDS"))
   print(end-start)
-  stopCluster(cl) #need this or it breaks -> will just continue running.
+  stopCluster(cl)
 }
 
 # p=48
@@ -92,7 +92,7 @@ if(k==2){
   end <-Sys.time()
   saveRDS(res, file = paste0("out", k, ".RDS"))
   print(end-start)
-  stopCluster(cl) #need this or it breaks -> will just continue running.
+  stopCluster(cl) 
 }
 
 # p = 96
@@ -138,7 +138,7 @@ if(k==3){
   end <-Sys.time() 
   saveRDS(res, file = paste0("out", k, ".RDS"))
   print(end-start)
-  stopCluster(cl) #need this or it breaks -> will just continue running.
+  stopCluster(cl) 
 }
 
 
@@ -186,7 +186,7 @@ if(k==4){
   end <-Sys.time() 
   saveRDS(res, file = paste0("out", k, ".RDS"))
   print(end-start)
-  stopCluster(cl) #need this or it breaks -> will just continue running.
+  stopCluster(cl) 
 }
 
 # p = 48
@@ -231,7 +231,7 @@ if(k==5){
   end <-Sys.time() 
   saveRDS(res, file = paste0("out", k, ".RDS"))
   print(end-start)
-  stopCluster(cl) #need this or it breaks -> will just continue running.
+  stopCluster(cl) 
 }
 
 # p = 96
@@ -276,7 +276,7 @@ if(k==6){
   end <-Sys.time() 
   saveRDS(res, file = paste0("out", k, ".RDS"))
   print(end-start)
-  stopCluster(cl) #need this or it breaks -> will just continue running.
+  stopCluster(cl) 
 }
 
 
