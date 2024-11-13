@@ -114,10 +114,14 @@ lasso2 = c(g_a$tab_auroc[,2] , g_b$tab_auroc[,2] , g_c$tab_auroc[,2])
 # lasso 3 estimates - ebic
 lasso3 = c(g_a$tab_auroc[,3] , g_b$tab_auroc[,3] , g_c$tab_auroc[,3])
 
-auroc_table = cbind(lasso2, lasso3)
+auroc_table = cbind(lasso1, lasso2, lasso3)
 auroc_table =  as.data.frame(auroc_table)
 
-model_selection = (cbind(f1_table[,-1], auroc_table))
+final_table = cbind(MSE_table, auroc_table)
+xtable(final_table)
+
+
+model_selection = (cbind(f1_table, auroc_table))
 model_selection <- model_selection %>% mutate(m = m)
 # reorder 
 model_selection <- model_selection %>% select(m, everything())

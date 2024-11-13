@@ -35,6 +35,13 @@ metrics = function(res, gt){
   true_pc = as.vector(gt$pc)
   est_pc_vec = lapply(pc_list, as.vector)
   
+  # make into 0 1 vectors
+  true_pc[true_pc!=0]=1
+  for(i in 1:length(est_pc_vec)){
+    est_pc_vec[[i]][est_pc_vec[[i]]!=0]=1
+    
+  }
+  
   # Check if the response has more than two levels
   if (length(unique(true_pc)) > 2) {
     
