@@ -131,3 +131,9 @@ model_selection <- model_selection %>% mutate(p = p)
 model_selection <- model_selection %>% select(p, everything())
 model_selection
 xtable(model_selection)
+
+
+
+# standard errors ---------------------------------------------------------
+
+
