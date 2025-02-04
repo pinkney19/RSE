@@ -159,35 +159,23 @@ ADMM = function(S_hat, Max_iter,lambda,rho,theta_warm){
   
   dim = dim(S_hat)[1] #How many processes are in total?
   
-  #z = D_tilde = rep(list(matrix(0,nrow=dim,ncol=dim)), Max_iter)
+  
   
   r = s = NULL; #r2=s2=NULL;
   
   theta[[1]] = theta_warm; #previous solution to ADMM
   
-  #zs = 
+  
   
   z[[1]] = u[[1]]= matrix(0,nrow=dim,ncol=dim)
   
-  #just for purpose of initialization 
-  # r[1] = 1#sum(abs(Mod(theta[[1]]-z[[1]]))) #l1 norm of Mod(theta-z)
-  # s[1] = 2#sum(abs(Mod(rho*(z[[1]]-z[[1]]))))
   
-  #checks
-  #k=2
+  
+  
   e_tol = 1e-4
   
   for(k in 2:Max_iter){
     
-    #Stopping criteria
-    
-    # if(min(r[k-1], s[k-1])<e_tol){
-    #   Max_iter = k-1
-    # }
-    # 
-    # else{
-    
-    #while(min(r[k-1], s[k-1])>e_tol){
     
     ###############################
     ####Theta minimization step####
@@ -240,11 +228,6 @@ ADMM = function(S_hat, Max_iter,lambda,rho,theta_warm){
     s[k] = sum(abs(d2))
     
     
-    # r[k] = sum((Mod(theta[[k]]-z[[k]]))^2)
-    # s[k] = sum((Mod(rho*(z[[k]]-z[[k-1]])))^2)
-    
-    #e_pri[k] = sqrt(n.stream^2)*e_tol + e_tol*8.370021
-    
     if(min(r[k], s[k])<e_tol & min(s, na.rm = T)!=0){break}
     
   }
@@ -283,11 +266,6 @@ partial_co = function(theta){
   }
   co[lower.tri(co)] = t(co)[lower.tri(co)] #populate lower triangle
   
-  #put diagonals to 0 just so can look at maximum connections
-  #diag(co)=0
-  
-  #connections = which(co > sort(co[lower.tri(co)], TRUE)[4], arr.ind = TRUE)
-  #diag(co)=1
   
   return(co)
 }
