@@ -38,12 +38,12 @@ get_ground_truth_lr = function(P_vec, freq, alpha_list, beta_list){
 
 # 10 Trials
 
-get_tuned_lambdas_low_rank = function(P_vec, alpha_list, beta_list, freq){
+get_tuned_lambdas_low_rank_lasso = function(P_vec, alpha_list, beta_list, freq){
 
   # load storm results - 10 trials
-  res1 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/ridge/out1.RDS") #12
-  res2 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/ridge/out2.RDS") #48
-  res3 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/ridge/out3.RDS") #96
+  res1 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/lasso/out1.RDS") #12
+  res2 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/lasso/out2.RDS") #48
+  res3 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/lasso/out3.RDS") #96
  
   
   # Recall structure of the files
@@ -66,32 +66,32 @@ get_tuned_lambdas_low_rank = function(P_vec, alpha_list, beta_list, freq){
   
   n.trials = 10
   
-  l12 = lam_func_ridge(lambdas, res1, N_samp, gt_12,12, n.trials)
-  l48 = lam_func_ridge(lambdas, res2, N_samp, gt_48, 48, n.trials)
-  l96 = lam_func_ridge(lambdas, res3, N_samp, gt_96, 96, n.trials)
+  l12 = lam_func(lambdas, res1, N_samp, gt_12,12, n.trials)
+  l48 = lam_func(lambdas, res2, N_samp, gt_48, 48, n.trials)
+  l96 = lam_func(lambdas, res3, N_samp, gt_96, 96, n.trials)
   
   ma_lams = rbind(l12, l48, l96)
   ma_lams
   # 50 trials 
-  res4 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/ridge/out4.RDS") #12
-  res5 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/ridge/out5.RDS") #48
-  res6 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/ridge/out6.RDS") #96
+  res4 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/lasso/out4.RDS") #12
+  res5 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/lasso/out5.RDS") #48
+  res6 <- readRDS("~/luna/RSE/Synthetic_Experiments/Tuning/low_rank/lasso/out6.RDS") #96
   
   n.trials = 50
-  l12_50 = lam_func_ridge(lambdas, res4, N_samp, gt_12,12, n.trials)
-  l48_50 = lam_func_ridge(lambdas, res5, N_samp, gt_48, 48, n.trials)
-  l96_50 = lam_func_ridge(lambdas, res6, N_samp, gt_96, 96, n.trials)
+  l12_50 = lam_func(lambdas, res4, N_samp, gt_12,12, n.trials)
+  l48_50 = lam_func(lambdas, res5, N_samp, gt_48, 48, n.trials)
+  l96_50 = lam_func(lambdas, res6, N_samp, gt_96, 96, n.trials)
   
-  model_A_lambdas = rbind(l12[1], l12_50[1], l48[1], l48_50[1], l96[1], l96_50[1])
+  model_A_lambdas = rbind(l12[1:3], l12_50[1:3], l48[1:3], l48_50[1:3], l96[1:3], l96_50[1:3])
   model_A_lambdas = as.data.frame(model_A_lambdas)
   
   return(model_A_lambdas)
 }
 
 
-lams_lr = get_tuned_lambdas_low_rank(P_vec, alpha_list, beta_list, freq=0.0628)
+lams_lr = get_tuned_lambdas_low_rank_lasso(P_vec, alpha_list, beta_list, freq=0.0628)
 
 lams_lr
 
 setwd("~/Downloads/RSE/4_Synthetic_Experiments/Additional_Experiments/Tuning")
-saveRDS(lams_lr, "Ridge_lambdas.RDS")
+saveRDS(lams_lr, "lasso_lambdas.RDS")
