@@ -23,7 +23,12 @@ metrics = function(res, gt){
   av_mse = mean( unlist(lapply(res, function(x) performance_measures(x, gt$theta, F)$l2)) )
   se = std_err(unlist(lapply(res, function(x) performance_measures(x, gt$theta, F)$l2)))
   
-  return(list(av_mse = av_mse, se = se))
+  # F1 score
+  pc_list = lapply(res, partial_co)
+  F1 = mean(unlist(lapply(pc_list, function(x) performance_measures(x, gt$pc, T)$F1)))
+  F1_se = std_err(unlist(lapply(pc_list, function(x) performance_measures(x, gt$pc, T)$F1)))
+  
+  return(list(av_mse = av_mse, se = se, av_F1 = F1, F1_se = F1_se))
 }
 
 
@@ -80,8 +85,9 @@ results_table_ridge = function(P_vec, freq, alpha_list, beta_list){
   mse = c(r1$av_mse, r4$av_mse, r2$av_mse, r5$av_mse, r3$av_mse, r6$av_mse)
   se = c(r1$se, r4$se, r2$se, r5$se, r3$se, r6$se)
 
-  
-  return(list(mse=mse, se=se)) 
+  F1 = c(r1$av_F1, r4$av_F1, r2$av_F1, r5$av_F1, r3$av_F1, r6$av_F1)
+  F1_se = c(r1$F1_se, r4$F1_se, r2$F1_se, r5$F1_se, r3$F1_se, r6$F1_se)
+  return(list(mse=mse, se=se, f1 = F1, f1_se = F1_se)) 
 }
 # low rank model --------------------------------------------------------------
 
