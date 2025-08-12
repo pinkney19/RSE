@@ -54,8 +54,9 @@ metrics = function(res, gt){
   }
   
   auc_obj = mean(unlist(auc_list))
+  auc_se = std_err(unlist(auc_list))
   
-  return(list(F1 = F1, av_mse = av_mse, av_AUC = auc_obj, se = se, f1_se = F1_se))
+  return(list(F1 = F1, av_mse = av_mse, av_AUC = auc_obj, se = se, au_se = auc_se))
 }
 results_table = function(P_vec, model_idx, model_type){
   
@@ -91,7 +92,7 @@ results_table = function(P_vec, model_idx, model_type){
   f1s_ebic = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
   auroc_ebic = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
   ses_ebic = c(r1$se, r4$se, r2$se, r5$se, r3$se, r6$se)
-  f1_ses_ebic = c(r1$f1_se, r4$f1_se, r2$f1_se, r5$f1_se, r3$f1_se, r6$f1_se)
+  au_ses_ebic = c(r1$au_se, r4$au_se, r2$au_se, r5$au_se, r3$au_se, r6$au_se)
   
   # mse results -------------------------------------------------------------
   
@@ -119,7 +120,7 @@ results_table = function(P_vec, model_idx, model_type){
   f1s_mse = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
   auroc_mse = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
   ses_mse = c(r1$se, r4$se, r2$se, r5$se, r3$se, r6$se)
-  f1_ses_mse = c(r1$f1_se, r4$f1_se, r2$f1_se, r5$f1_se, r3$f1_se, r6$f1_se)
+  au_ses_mse = c(r1$au_se, r4$au_se, r2$au_se, r5$au_se, r3$au_se, r6$au_se)
   # f1 results --------------------------------------------------------------
   
   # load data
@@ -146,16 +147,16 @@ results_table = function(P_vec, model_idx, model_type){
   f1s_f1 = c(r1$F1, r4$F1, r2$F1, r5$F1, r3$F1, r6$F1)
   auroc_f1 = c(r1$av_AUC, r4$av_AUC, r2$av_AUC, r5$av_AUC, r3$av_AUC, r6$av_AUC)
   ses_f1 = c(r1$se, r4$se, r2$se, r5$se, r3$se, r6$se)
-  f1_ses_f1 = c(r1$f1_se, r4$f1_se, r2$f1_se, r5$f1_se, r3$f1_se, r6$f1_se)
+  au_ses_f1 = c(r1$au_se, r4$au_se, r2$au_se, r5$au_se, r3$au_se, r6$au_se)
   
   # results tables
   tab_mse = cbind(mses_mse, mses_f1, mses_ebic)
   tab_f1 = cbind(f1s_mse, f1s_f1, f1s_ebic)
   tab_auroc = cbind(auroc_mse, auroc_f1, auroc_ebic)
   tab_ses = cbind(ses_mse, ses_f1, ses_ebic)
-  tab_f1_ses = cbind(f1_ses_mse, f1_ses_f1, f1_ses_ebic)
+  tab_au_ses = cbind(au_ses_mse, au_ses_f1, au_ses_ebic)
   
-  return(list(tab_mse = tab_mse, tab_f1 = tab_f1, tab_auroc=tab_auroc, tab_ses = tab_ses, tab_f1_ses = tab_f1_ses)) 
+  return(list(tab_mse = tab_mse, tab_f1 = tab_f1, tab_auroc=tab_auroc, tab_ses = tab_ses, tab_au_ses = tab_au_ses)) 
 }
 # Model a -----------------------------------------------------------------
 

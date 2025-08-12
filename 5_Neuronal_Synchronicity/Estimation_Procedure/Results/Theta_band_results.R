@@ -16,15 +16,15 @@ lambdas = logspace(log10(0.001), log10(10), 100)
 
 # results for laser on condition ------------------------------------------
 
-est1_0 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Delta_band/Laser_on/est_0.RDS")
-est1_10 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Delta_band/Laser_on/est_10.RDS")
-est1_50 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Delta_band/Laser_on/est_50.RDS")
+est1_0 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Theta_band/Laser_on/est_0.RDS")
+est1_10 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Theta_band/Laser_on/est_10.RDS")
+est1_50 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Theta_band/Laser_on/est_50.RDS")
 
 # results for laser off condition ------------------------------------------
 
-est2_0 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Delta_band/Laser_off/est_0.RDS")
-est2_10 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Delta_band/Laser_off/est_10.RDS")
-est2_50 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Delta_band/Laser_off/est_50.RDS")
+est2_0 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Theta_band/Laser_off/est_0.RDS")
+est2_10 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Theta_band/Laser_off/est_10.RDS")
+est2_50 <- readRDS("~/Downloads/RSE/5_Neuronal_Synchronicity/Estimation_Procedure/Theta_band/Laser_off/est_50.RDS")
 
 
 res1 = calc_result(est1_0)
@@ -68,6 +68,7 @@ edges_list_off
 title_list = c("","","")
 
 library(igraph)
+
 zero = list(res4$pc, res1$pc)
 zero_points = c(("AvgPoints = 874"), expression("AvgPoints = 284"))
 plot_UGM_new(zero, title_list, zero_points)
@@ -89,11 +90,12 @@ plot_UGM_new(fifty, title_list, fifty_points)
 
 # Checks on no laser conditions -------------------------------------------
 
-# check = list(res4$pc, res5$pc)
-# check_points =  c(("AvgPoints = 874"), expression("AvgPoints = 778"))
-# plot_UGM_new(check, title_list = c(expression(0~mW/mm^2), expression(10~mW/mm^2)), check_points)
+#check = list(res4$pc, res5$pc)
+#check_points =  c(("AvgPoints = 874"), expression("AvgPoints = 778"))
+#plot_UGM_new(check, title_list = c(expression(0~mW/mm^2), expression(10~mW/mm^2)), check_points)
 # # 
 # # 
+
 
 # chosen regularisation parameters
 # on

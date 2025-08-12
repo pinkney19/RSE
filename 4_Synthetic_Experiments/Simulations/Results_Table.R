@@ -15,7 +15,7 @@ r_c <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Ridge/res_c.
 # Mean-squared Errors -----------------------------------------------------
 
 # ridge estimates
-Ridge = c(r_a, r_b, r_c)
+Ridge = c(r_a$mse, r_b$mse, r_c$mse)
 
 # lasso 1 estimates - mse
 Lasso1 = c(g_a$tab_mse[,1] , g_b$tab_mse[,1] , g_c$tab_mse[,1])
@@ -50,7 +50,7 @@ round(f1_table,2)
 
 # Periodogram -------------------------------------------------------------
 
-res_periodogram <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Periodogram/res_periodogram.RDS")
+res_periodogram <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Periodogram/Results/res_periodogram.RDS")
 
 data_per = c(0, res_periodogram[1], 0, res_periodogram[2], 0, 0, 0, res_periodogram[3], 0, res_periodogram[4],0, 0, 0, res_periodogram[5], 0, res_periodogram[6], 0, 0)
 
@@ -136,4 +136,36 @@ xtable(model_selection)
 
 # standard errors ---------------------------------------------------------
 
+# ridge estimates
+Ridge = c(r_a$se, r_b$se, r_c$se)
 
+# lasso 1 estimates - mse
+Lasso1 = c(g_a$tab_ses[,1] , g_b$tab_ses[,1] , g_c$tab_ses[,1])
+
+# lasso 2 estimates - f1
+Lasso2 = c(g_a$tab_ses[,2] , g_b$tab_ses[,2] , g_c$tab_ses[,2])
+
+# lasso 3 estimates - ebic
+Lasso3 = c(g_a$tab_ses[,3] , g_b$tab_ses[,3] , g_c$tab_ses[,3])
+
+#periodogram 
+ses_periodogram <- readRDS("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Periodogram/Results/ses_periodogram.RDS")
+
+SE_table = cbind(Ridge,Lasso1, Lasso2, Lasso3)
+SE_table = as.data.frame(SE_table)
+
+round(SE_table, 2)
+
+# AUROC
+#AUROC
+# lasso 1 estimates - mse
+lasso1 = c(g_a$tab_au_ses[,1] , g_b$tab_au_ses[,1] , g_c$tab_au_ses[,1])
+
+# lasso 2 estimates - f1
+lasso2 = c(g_a$tab_au_ses[,2] , g_b$tab_au_ses[,2] , g_c$tab_au_ses[,2])
+
+# lasso 3 estimates - ebic
+lasso3 = c(g_a$tab_au_ses[,3] , g_b$tab_au_ses[,3] , g_c$tab_au_ses[,3])
+
+check2 = round(cbind(lasso1, lasso2, lasso3),2)
+check2$

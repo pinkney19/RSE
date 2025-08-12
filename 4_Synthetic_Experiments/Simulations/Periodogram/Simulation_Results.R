@@ -67,5 +67,6 @@ r6 = metrics(out6, gtc_48)
 
 mse = c(r1$av_mse, r2$av_mse, r3$av_mse, r4$av_mse, r5$av_mse, r6$av_mse)
 se = c(r1$se, r2$se, r3$se, r4$se, r5$se, r6$se)
-
+setwd("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Periodogram/Results")
 saveRDS(mse, "res_periodogram.RDS")
+saveRDS(se, "ses_periodogram.RDS")

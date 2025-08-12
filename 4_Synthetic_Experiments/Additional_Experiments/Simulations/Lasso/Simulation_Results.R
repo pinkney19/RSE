@@ -59,7 +59,7 @@ metrics = function(res, gt){
   #auc_list = lapply(roc_obj, auc)
   
   # doesnt make sense to use AUROC here as a metric -> consider F1 score instead!
-
+  # Note: in non-sparse case it doesnt make sense to calculate AUROC
   #auc_obj = mean(unlist(auc_list))
   
   return(list(F1 = F1, av_mse = av_mse, se = se, f1_se = F1_se))
@@ -153,7 +153,7 @@ results_table_add = function(P_vec, freq, alpha_list, beta_list){
   tab_ses = cbind(ses_mse, ses_ebic)
   tab_f1_ses = cbind(f1_ses_mse, f1_ses_ebic)
   
-  return(list(tab_mse = tab_mse, tab_f1 = tab_f1, tab_ses = tab_ses, tab_f1_ses = tab_f1_ses)) 
+  return(list(tab_mse = tab_mse, tab_f1 = tab_f1, tab_ses = tab_ses, tab_f1_ses = tab_f1_ses, tab_auroc = tab_auroc)) 
 }
 
 # Low rank model  ----------------------------------------------------------------

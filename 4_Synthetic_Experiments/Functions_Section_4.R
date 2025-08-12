@@ -449,13 +449,15 @@ MV_spectra = function(omega, alpha, beta,nu, n.stream){
   # D         - Diagonal matrix of rates of each process
   # pc        - Partial coherence matrix at specified frequency
   
+  nu= rep(0.2, n.stream)
+  
   img=sqrt(as.complex(-1))
   I = diag(1,n.stream, n.stream)
   M = (alpha)/beta
   D = solve(I-M)
-  D = D*nu
-  D = diag(D)
-  D =diag(D, n.stream,n.stream)
+  D = D %*% nu
+  D = diag(as.vector(D))
+  # D =diag(D, n.stream,n.stream)
   spectra = list();
   for(i in 1:length(omega)){
     gamma = alpha/(beta+(img*omega[i]))
