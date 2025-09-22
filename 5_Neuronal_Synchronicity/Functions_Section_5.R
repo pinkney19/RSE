@@ -383,8 +383,8 @@ plot_UGM_new <- function(pc_list, title_list, points_list){
     plot(g1[[i]], layout=layout.circle, edge.color=df1[[i]]$col, 
          vertex.color="white", vertex.label.color = "black", main ="", cex=2,vertex.size=20, 
          vertex.label.size=10, vertex.label.cex=1.3, family ="serif")
-    title(title_list[i], cex.main = 2,  adj =0, line=-1, family="serif")
-    title(points_list[i], cex.main = 2, adj =0, line = -24, family="serif")
+    title(title_list[i], cex.main = 2,  adj =0.5, line=-1, family="serif")
+    title(points_list[i], cex.main = 2, adj =0.5, line = -24, family="serif")
   }
   
   
