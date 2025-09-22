@@ -71,13 +71,13 @@ results_table = function(P_vec, model_idx, model_type){
   
   # load data
   # 10 trials 
-  out1 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/eBIC/out1.RDS")) #p=12
-  out2 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/eBIC/out2.RDS")) #p=48
-  out3 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/eBIC/out3.RDS")) #p=96
+  out1 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/eBIC/out1.RDS")) #p=12
+  out2 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/eBIC/out2.RDS")) #p=48
+  out3 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/eBIC/out3.RDS")) #p=96
   # 50 trials
-  out4 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/eBIC/out4.RDS")) #p=12
-  out5 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/eBIC/out5.RDS")) #p=48
-  out6 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/eBIC/out6.RDS")) #p=96
+  out4 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/eBIC/out4.RDS")) #p=12
+  out5 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/eBIC/out5.RDS")) #p=48
+  out6 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/eBIC/out6.RDS")) #p=96
   
   r1 = metrics(out1, gt_12)
   r2 = metrics(out2, gt_48)
@@ -98,13 +98,13 @@ results_table = function(P_vec, model_idx, model_type){
   
   # load data
   # 10 trials 
-  out1 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/mse/out1.RDS")) #p=12
-  out2 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/mse/out2.RDS")) #p=48
-  out3 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/mse/out3.RDS")) #p=96
+  out1 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/mse/out1.RDS")) #p=12
+  out2 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/mse/out2.RDS")) #p=48
+  out3 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/mse/out3.RDS")) #p=96
   # 50 trials
-  out4 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/mse/out4.RDS")) #p=12
-  out5 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/mse/out5.RDS")) #p=48
-  out6 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/mse/out6.RDS")) #p=96
+  out4 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/mse/out4.RDS")) #p=12
+  out5 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/mse/out5.RDS")) #p=48
+  out6 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/mse/out6.RDS")) #p=96
   
   
   r1 = metrics(out1, gt_12)
@@ -125,13 +125,13 @@ results_table = function(P_vec, model_idx, model_type){
   
   # load data
   # 10 trials 
-  out1 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/f1/out1.RDS")) #p=12
-  out2 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/f1/out2.RDS")) #p=48
-  out3 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/f1/out3.RDS")) #p=96
+  out1 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/f1/out1.RDS")) #p=12
+  out2 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/f1/out2.RDS")) #p=48
+  out3 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/f1/out3.RDS")) #p=96
   # 50 trials
-  out4 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/f1/out4.RDS")) #p=12
-  out5 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/f1/out5.RDS")) #p=48
-  out6 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical/Model_", model_type, "/Results/f1/out6.RDS")) #p=96
+  out4 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/f1/out4.RDS")) #p=12
+  out5 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/f1/out5.RDS")) #p=48
+  out6 <- readRDS(paste0("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical/Model_", model_type, "/Results/f1/out6.RDS")) #p=96
   
   
   r1 = metrics(out1, gt_12)
@@ -170,7 +170,7 @@ res_c = results_table(P_vec,3, "C")
 # save results ------------------------------------------------------------
 
 
-setwd("~/Downloads/RSE/4_Synthetic_Experiments/Simulations/Graphical")
+setwd("~/Downloads/RSE/4_Synthetic_Experiments/Simulations2/Graphical")
 saveRDS(res_a, "res_a.RDS")
 saveRDS(res_b, "res_b.RDS")
 saveRDS(res_c, "res_c.RDS")
